@@ -26,7 +26,7 @@ using Oxide.Core;
 
 namespace Oxide.Plugins
 {
-    [Info("Cook Storage", "RFC1920", "0.0.2")]
+    [Info("Cook Storage", "RFC1920", "0.0.3")]
     [Description("Allow non-food items in ovens and furnaces.  Also, optionally, allow cooking of those items.")]
     internal class CookStorage : RustPlugin
     {
@@ -689,7 +689,6 @@ namespace Oxide.Plugins
                     { "sunglasses03.black.item", new ItemCookInfo("metal.fragments") },
                     { "sunglasses03.chrome.item", new ItemCookInfo("metal.fragments") },
                     { "sunglasses03.gold.item", new ItemCookInfo("metal.fragments") },
-                    { "sunglasses.item", new ItemCookInfo("metal.fragments") },
                     { "sunglasses.item", new ItemCookInfo("metal.fragments") },
                     { "supply_signal.item", new ItemCookInfo("metal.fragments") },
                     { "surgeon_suit.item", new ItemCookInfo("metal.fragments") },
