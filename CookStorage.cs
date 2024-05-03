@@ -1,4 +1,4 @@
-﻿#region License (GPL v2)
+#region License (GPL v2)
 /*
     CookStorage - Allow any item to be added to campfires, ovens, furnaces, etc.
     Copyright (c) 2023 RFC1920 <desolationoutpostpve@gmail.com>
@@ -20,31 +20,25 @@
 #endregion License (GPL v2)
 using System;
 using System.Collections.Generic;
-using Harmony;
+using HarmonyLib;
 using Oxide.Core;
+using Oxide.Core.Plugins;
 //Reference: 0Harmony
 
 namespace Oxide.Plugins
 {
-    [Info("Cook Storage", "RFC1920", "0.0.3")]
+    [Info("Cook Storage", "RFC1920", "0.0.4")]
     [Description("Allow non-food items in ovens and furnaces.  Also, optionally, allow cooking of those items.")]
     internal class CookStorage : RustPlugin
     {
-        private HarmonyInstance _harmony;
         private ConfigData configData;
 
         private void OnServerInitialized()
         {
             LoadConfigVariables();
-            _harmony = HarmonyInstance.Create(Name + "PATCH");
-            Type patchType = AccessTools.Inner(typeof(CookStorage), "GetAllowedSlotsPatch");
-            new PatchProcessor(_harmony, patchType, HarmonyMethod.Merge(patchType.GetHarmonyMethods())).Patch();
-
-            Puts($"Applied Patch: {patchType.Name}");
         }
 
-        private void Unload() => _harmony.UnpatchAll(Name + "PATCH");
-
+        [AutoPatch]
         [HarmonyPatch(typeof(BaseOven), "GetAllowedSlots")]
         public static class GetAllowedSlotsPatch
         {
